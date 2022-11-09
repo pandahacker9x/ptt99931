@@ -35,9 +35,10 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -180%);
+      transform: translate(-50%, -100%);
       color: white;
       font-size: 0.6rem;
+      font-weight: bold;
       opacity: 1.0;
       font-family: 'Courier New', Courier, monospace;
     }
@@ -77,6 +78,20 @@
     }
 
     particleSettings = [
+      //// Empty heart center
+      {
+        particles: {
+          length: 1000, // maximum amount of particles
+          duration: 3.0, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          effect: -0.75, // play with this for a nice effect
+          // effect: -1, // play with this for a nice effect
+          // effect: 2.75, // play with this for empty space heart
+          effect: -3, // play with this for heart particles fire
+          size: 10 // particle size in pixels
+        }
+      },
+
       //// Empty heart center
       {
         particles: {
