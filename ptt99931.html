@@ -21,12 +21,14 @@
       width: 100%;
       height: 100%;
       animation: beat 0.5s infinite alternate;
-    	transform-origin: center;
+      transform-origin: center;
     }
 
     /* Heart beat animation */
-    @keyframes beat{
-      to { transform: scale(0.92); }
+    @keyframes beat {
+      to {
+        transform: scale(0.92);
+      }
     }
 
     .center {
@@ -40,79 +42,97 @@
       font-family: 'Courier New', Courier, monospace;
     }
 
-    .text-anim {
+    #anim-text {
       animation: beat 0.5s infinite alternate;
-    	transform-origin: center;
+      transform-origin: center;
     }
   </style>
 </HEAD>
 
 <BODY>
   <div class="center">
-    <div class="text-anim">P T T 9 9 9 3 1</div>
+    <div id="text-anim">P T T 9 9 9 3 1</div>
   </div>
   <canvas id="pinkboard" style="display: absolute;"></canvas>
   <script>
+    const queryString = window.location.search;
+    const queryParams = new URLSearchParams(queryString);
+    const color = queryParams.get('color');
+    const text = queryParams.get('text');
+    if (!color) {
+      color = '#ffffff';
+    }
+    if (!text) {
+      text = 'P T T 9 9 9 3 1';
+    }
+    const textElement = document.getElementById('text-anim')
+    textElement.innerText = text;
+    textElement.style.color = color;
+
     particleSettings = [
       //// Empty heart center
       {
         particles: {
-        length: 1000, // maximum amount of particles
-        duration: 3.0, // particle duration in sec
-        velocity: 100, // particle velocity in pixels/sec
-        effect: -0.75, // play with this for a nice effect
-        // effect: -1, // play with this for a nice effect
-        // effect: 2.75, // play with this for empty space heart
-        // effect: -3, // play with this for heart particles fire
-        size: 10 // particle size in pixels
+          length: 1000, // maximum amount of particles
+          duration: 3.0, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          effect: -0.75, // play with this for a nice effect
+          // effect: -1, // play with this for a nice effect
+          // effect: 2.75, // play with this for empty space heart
+          // effect: -3, // play with this for heart particles fire
+          size: 10 // particle size in pixels
         }
       },
 
       //// simple heart 2
       {
-       particles: {
-        length: 500, // maximum amount of particles
-        duration: 2.5, // particle duration in sec
-        velocity: 100, // particle velocity in pixels/sec
-        effect: -0.75, // play with this for a nice effect
-        // effect: 2.75, // play with this for empty space heart
-        // effect: -3, // play with this for heart particles fire
-        size: 15 // particle size in pixels
-      }},
+        particles: {
+          length: 500, // maximum amount of particles
+          duration: 2.5, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          effect: -0.75, // play with this for a nice effect
+          // effect: 2.75, // play with this for empty space heart
+          // effect: -3, // play with this for heart particles fire
+          size: 15 // particle size in pixels
+        }
+      },
 
       //// simple heart
       {
-       particles: {
-        length: 500, // maximum amount of particles
-        duration: 0.4, // particle duration in sec
-        velocity: 100, // particle velocity in pixels/sec
-        // effect: -0.75, // play with this for a nice effect
-        // effect: 2.75, // play with this for empty space heart
-        effect: -3, // play with this for heart particles fire
-        size: 5 // particle size in pixels
-      }},
+        particles: {
+          length: 500, // maximum amount of particles
+          duration: 0.4, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          // effect: -0.75, // play with this for a nice effect
+          // effect: 2.75, // play with this for empty space heart
+          effect: -3, // play with this for heart particles fire
+          size: 5 // particle size in pixels
+        }
+      },
 
       //// Empty heart center, fire
-      { particles: {
-        length: 500, // maximum amount of particles
-        duration: 0.4, // particle duration in sec
-        velocity: 100, // particle velocity in pixels/sec
-        // effect: -0.75, // play with this for a nice effect
-        effect: 2.75, // play with this for empty space heart
-        // effect: -3, // play with this for heart particles fire
-        size: 30 // particle size in pixels
-      }},
+      {
+        particles: {
+          length: 500, // maximum amount of particles
+          duration: 0.4, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          // effect: -0.75, // play with this for a nice effect
+          effect: 2.75, // play with this for empty space heart
+          // effect: -3, // play with this for heart particles fire
+          size: 30 // particle size in pixels
+        }
+      },
 
       //// Empty heart center
       {
         particles: {
-        length: 500, // maximum amount of particles
-        duration: 1, // particle duration in sec
-        velocity: 100, // particle velocity in pixels/sec
-        // effect: -0.75, // play with this for a nice effect
-        effect: 2.75, // play with this for empty space heart
-        // effect: -3, // play with this for heart particles fire
-        size: 30 // particle size in pixels
+          length: 500, // maximum amount of particles
+          duration: 1, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          // effect: -0.75, // play with this for a nice effect
+          effect: 2.75, // play with this for empty space heart
+          // effect: -3, // play with this for heart particles fire
+          size: 30 // particle size in pixels
         }
       },
     ];
@@ -310,13 +330,14 @@
         // // grd.addColorStop(0.5, "blue");
         // grd.addColorStop(1, "red");
 
-        var grd=context.createLinearGradient(0, 0, 200, 0);
+        var grd = context.createLinearGradient(0, 0, 200, 0);
         grd.addColorStop(0, "red");
         grd.addColorStop(0.5, "blue");
         grd.addColorStop(1, "black");
-        
+
         // context.fillStyle = '#ea80b0';
-        context.fillStyle = '#ffffff';
+        // context.fillStyle = '#ffffff';
+        context.fillStyle = color;
         // context.fillStyle = grd;
         context.fill();
         context.font = '48px serif';
