@@ -38,7 +38,7 @@
       transform: translate(-50%, -180%);
       color: white;
       font-size: 0.6rem;
-      opacity: 0.6;
+      opacity: 0.8;
       font-family: 'Courier New', Courier, monospace;
     }
 
@@ -51,7 +51,7 @@
 
 <BODY>
   <div class="center">
-    <div id="text-anim">P T T 9 9 9 3 1</div>
+    <div id="anim-text">P T T 9 9 9 3 1</div>
   </div>
   <canvas id="pinkboard" style="display: absolute;"></canvas>
   <script>
@@ -60,12 +60,13 @@
     let color = queryParams.get('color');
     let text = queryParams.get('text');
     if (!color) {
-      color = '#ffffff';
+      color = '#eb34b4';
+      // color = '#ffffff';
     }
     if (!text) {
       text = 'P T T 9 9 9 3 1';
     }
-    const textElement = document.getElementById('text-anim')
+    const textElement = document.getElementById('anim-text')
     textElement.innerText = text;
     textElement.style.color = color;
 
