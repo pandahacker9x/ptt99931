@@ -57,8 +57,8 @@
   <script>
     const queryString = window.location.search;
     const queryParams = new URLSearchParams(queryString);
-    const color = queryParams.get('color');
-    const text = queryParams.get('text');
+    let color = queryParams.get('color');
+    let text = queryParams.get('text');
     if (!color) {
       color = '#ffffff';
     }
