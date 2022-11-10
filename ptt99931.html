@@ -60,12 +60,16 @@
     const queryParams = new URLSearchParams(queryString);
     let color = queryParams.get('color');
     let text = queryParams.get('text');
+    let styleIndex = queryParams.get('styleIndex');
     if (!color) {
       // color = '#eb34b4';
       color = '#ffffff';
     }
     if (!text) {
       text = 'P T T 9 9 9 3 1';
+    }
+    if (!styleIndex) {
+      styleIndex = 0;
     }
     const textElement = document.getElementById('anim-text')
     textElement.innerText = text;
@@ -81,20 +85,6 @@
       //// Empty heart center
       {
         particles: {
-          length: 1500, // maximum amount of particles
-          duration: 3.0, // particle duration in sec
-          velocity: 100, // particle velocity in pixels/sec
-          effect: -0.75, // play with this for a nice effect
-          // effect: -1, // play with this for a nice effect
-          // effect: 2.75, // play with this for empty space heart
-          effect: -3, // play with this for heart particles fire
-          size: 10 // particle size in pixels
-        }
-      },
-
-      //// Empty heart center
-      {
-        particles: {
           length: 1000, // maximum amount of particles
           duration: 3.0, // particle duration in sec
           velocity: 100, // particle velocity in pixels/sec
@@ -102,6 +92,19 @@
           // effect: -1, // play with this for a nice effect
           // effect: 2.75, // play with this for empty space heart
           // effect: -3, // play with this for heart particles fire
+          size: 10 // particle size in pixels
+        }
+      },
+      //// Empty heart center
+      {
+        particles: {
+          length: 1500, // maximum amount of particles
+          duration: 3.0, // particle duration in sec
+          velocity: 100, // particle velocity in pixels/sec
+          effect: -0.75, // play with this for a nice effect
+          // effect: -1, // play with this for a nice effect
+          // effect: 2.75, // play with this for empty space heart
+          effect: -3, // play with this for heart particles fire
           size: 10 // particle size in pixels
         }
       },
@@ -161,7 +164,7 @@
     /*
      * Settings
      */
-    var settings = particleSettings[0];
+    var settings = particleSettings[styleIndex];
     /*
      * RequestAnimationFrame polyfill by Erik Möller
      */
