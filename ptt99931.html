@@ -37,7 +37,7 @@
       left: 50%;
       transform: translate(-50%, -100%);
       color: white;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       font-weight: bold;
       opacity: 1.0;
       font-family: 'Courier New', Courier, monospace;
@@ -74,11 +74,12 @@
     const textElement = document.getElementById('anim-text')
     textElement.innerText = text;
     textElement.style.color = color;
-
-    var scaleHeart = 1;
+    let scaleHeart = 1;
+    let isMobile = false;
     if (window.screen.width <= 720) {
+      isMobile = true;
       scaleHeart = 2.1;
-      textElement.style.fontSize = '1.2rem';
+      textElement.style.fontSize = '1.7rem';
     }
 
     particleSettings = [
@@ -92,7 +93,7 @@
           // effect: -1, // play with this for a nice effect
           // effect: 2.75, // play with this for empty space heart
           // effect: -3, // play with this for heart particles fire
-          size: 10 // particle size in pixels
+          size: isMobile ? 13 : 10 // particle size in pixels
         }
       },
       //// Empty heart center
@@ -323,20 +324,23 @@
         canvas.width = settings.particles.size;
         canvas.height = settings.particles.size;
         // helper function to create the path
-        function to(t) {
+        function to(t, isInnerHeart) {
+          const divider = isInnerHeart
+            ? isMobile ? 650 : 350
+            : 350;
           var point = pointOnHeart(t);
-          point.x = settings.particles.size / 2 + point.x * settings.particles.size / 350;
-          point.y = settings.particles.size / 2 - point.y * settings.particles.size / 350;
+          point.x = settings.particles.size / 2 + point.x * settings.particles.size / divider;
+          point.y = settings.particles.size / 2 - point.y * settings.particles.size / divider;
           return point;
         }
         // create the path
         context.beginPath();
         var t = -Math.PI;
-        var point = to(t);
+        var point = to(t, false);
         context.moveTo(point.x, point.y);
         while (t < Math.PI) {
           t += 0.01; // baby steps!
-          point = to(t);
+          point = to(t, true);
           context.lineTo(point.x, point.y);
         }
         context.closePath();
